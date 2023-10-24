@@ -1,22 +1,23 @@
 package lesson4.task2;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Customer {
     //region Constructor
-
-    public Customer(String name, String surname) {
+    public Customer(String name, String surname, String login, String password) {
         this.name = name;
         this.surname = surname;
+        this.login = login;
+        this.password = password;
     }
-
-    public Customer() {
-        ;
-    }
-
     //endregion
     //region Properties
     public Collection<Ticket> getTickets() {
+        // Постусловие
+        if (tickets == null) {
+            throw new RuntimeException("У пользователя нет билетов.");
+        }
         return tickets;
     }
 
@@ -24,11 +25,28 @@ public class Customer {
         this.tickets = tickets;
     }
 
-    public void addNewTicket(Ticket ticket){
+    public void addNewTicket(Ticket ticket) {
         this.tickets.add(ticket);
     }
+
     public int getId() {
         return id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     @Override
@@ -48,8 +66,9 @@ public class Customer {
     private final int id;
     private String name;
     private String surname;
-
-    private Collection<Ticket> tickets;
+    private String password;
+    private String login;
+    private Collection<Ticket> tickets = new ArrayList<>();
 
     {
         id = ++counter;

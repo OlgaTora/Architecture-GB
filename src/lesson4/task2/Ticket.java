@@ -5,7 +5,7 @@ import java.util.Random;
 
 class Ticket {
     //region Constructor
-    public Ticket(int customerId, String ticketType) {
+    public Ticket(int customerId, TicketType ticketType) {
         this.customerId = customerId;
         this.ticketType = ticketType;
         this.qrcode = generateQrcode();
@@ -53,6 +53,18 @@ class Ticket {
         return date;
     }
 
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", date=" + date +
+                ", qrcode='" + qrcode + '\'' +
+                ", ticketType=" + ticketType +
+                ", enable=" + enable +
+                '}' + '\n';
+    }
+
     //endregion
     //region Fields
     private static int counter;
@@ -60,7 +72,7 @@ class Ticket {
     private int customerId;
     private Date date = new Date();
     private String qrcode;
-    private String ticketType;
+    private TicketType ticketType;
 
     {
         id = ++counter;

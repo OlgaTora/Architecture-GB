@@ -5,38 +5,33 @@ import java.util.Collection;
 import java.util.Date;
 
 public class TicketProvider {
-
-    private final Database database;
-    private final PaymentProvider paymentProvider;
-
-
-    public TicketProvider(Database database, PaymentProvider paymentProvider){
+    //region Constructor
+    public TicketProvider(Database database, PaymentProvider paymentProvider) {
         this.database = database;
         this.paymentProvider = paymentProvider;
     }
 
-    public Collection<Ticket> searchTicket(int clientId, Date date){
-
+    //endregion
+    //region Properties
+    public Collection<Ticket> searchTicket(int clientId, Date date) {
         Collection<Ticket> tickets = new ArrayList<>();
-        for (Ticket ticket: database.getTickets()) {
+        for (Ticket ticket : database.getTickets()) {
             if (ticket.getCustomerId() == clientId && ticket.getDate().equals(date))
                 tickets.add(ticket);
         }
         return tickets;
-
     }
 
-    public boolean buyTicket(int clientId, String cardNo){
-
+    public boolean buyTicket(int clientId, String cardNo) {
         int orderId = database.createTicketOrder(clientId);
         double amount = database.getTicketAmount();
-        return paymentProvider.buyTicket(orderId,  cardNo, amount);
+        return paymentProvider.buyTicket(orderId, cardNo, amount);
 
     }
 
-    public boolean checkTicket(String qrcode){
-        for (Ticket ticket: database.getTickets()) {
-            if (ticket.getQrcode().equals(qrcode)){
+    public boolean checkTicket(String qrcode) {
+        for (Ticket ticket : database.getTickets()) {
+            if (ticket.getQrcode().equals(qrcode)) {
                 ticket.setEnable(false);
                 // Save database ...
                 return true;
@@ -45,5 +40,9 @@ public class TicketProvider {
         return false;
     }
 
-
+    //endregion
+    //region Fields
+    private final Database database;
+    private final PaymentProvider paymentProvider;
+    //endregion
 }
