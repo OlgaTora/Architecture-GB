@@ -3,6 +3,7 @@ package lesson4.task2;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public class TicketProvider {
     //region Constructor
@@ -13,13 +14,18 @@ public class TicketProvider {
 
     //endregion
     //region Properties
-    public Collection<Ticket> searchTicket(int clientId, Date date) {
-        Collection<Ticket> tickets = new ArrayList<>();
+    public Collection<Ticket> searchTicket(int clientId, String date) {
+        Collection<Ticket> searchTickets = new ArrayList<>();
         for (Ticket ticket : database.getTickets()) {
             if (ticket.getCustomerId() == clientId && ticket.getDate().equals(date))
-                tickets.add(ticket);
+                //System.out.println(ticket.getDate());
+                searchTickets.add(ticket);
         }
-        return tickets;
+        if (searchTickets.isEmpty()) {
+            throw new RuntimeException("У пользователя нет билетов на эту дату.");
+        }
+        // System.out.println(searchTickets);
+        return searchTickets;
     }
 
     public boolean buyTicket(int clientId, String cardNo) {

@@ -1,5 +1,6 @@
 package lesson4.task2;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -25,20 +26,35 @@ public class MobileApp {
         }
     }
 
-    public void searchTicket(Date date) {
+    public void searchTicket(String date) throws Exception {
         if (customer == null) {
             throw new RuntimeException("Для поиска билетов нужна авторизация.");
         }
-        customer.setTickets(ticketProvider.searchTicket(customer.getId(), new Date()));
+        try {
+            System.out.println("Ищем билеты...");
+            Collection<Ticket> searchTickets = ticketProvider.searchTicket(customer.getId(), date);
+            System.out.println(customer.searchTickets(ticketProvider.searchTicket(customer.getId(), date)));
+            System.out.println("Найдены билеты:");
+            System.out.println(searchTickets);
+        } catch (RuntimeException e) {
+            throw new Exception("Ошибка при получении данных о билетах.");
+        }
     }
 
     public void logIn(String login, String password) throws Exception {
         try {
-            this.customer = customerProvider.getCustomer(login, password);
-            System.out.printf("Пользователь %s %s вошел в систему\n", customer.getName(), customer.getSurname());
-        } catch (RuntimeException e) {
+            if (this.customer == null) {
+                this.customer = customerProvider.getCustomer(login, password);
+                System.out.printf("Пользователь %s %s вошел в систему\n", customer.getName(), customer.getSurname());
+            } else {
+                System.out.printf("Пользователь %s %s уже в системе\n", customer.getName(), customer.getSurname());
+            }
+
+        } catch (
+                RuntimeException e) {
             throw new Exception("Ошибка при получении данных о пользователе.", e.fillInStackTrace());
         }
+
     }
 
     public void logOut() {

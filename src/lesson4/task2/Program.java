@@ -20,8 +20,13 @@ public class Program {
         BusStation busStation = new BusStation(core.getTicketProvider());
         mobileApp.logIn("surname1", "surname1");
         mobileApp.getTickets();
-        System.out.println("_______________");
+        System.out.println("Покупка билета.");
         mobileApp.buyTicket("1000000000000099", TicketType.METRO);
+        mobileApp.getTickets();
+        mobileApp.searchTicket("Wed Oct 25 2023");
+        mobileApp.logIn("surname1", "surnam1");
+        mobileApp.logOut();
+        //mobileApp.logIn("surname1", "surnam1");
     }
 }
 

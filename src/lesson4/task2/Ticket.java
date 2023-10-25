@@ -49,8 +49,8 @@ class Ticket {
         return customerId;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        return date.toString();
     }
 
     @Override

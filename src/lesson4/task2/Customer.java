@@ -21,8 +21,10 @@ public class Customer {
         return tickets;
     }
 
-    public void setTickets(Collection<Ticket> tickets) {
-        this.tickets = tickets;
+    public Collection<Ticket> searchTickets(Collection<Ticket> tickets)
+    {
+        System.out.println("Печать из кастомер");
+        return tickets;
     }
 
     public void addNewTicket(Ticket ticket) {
