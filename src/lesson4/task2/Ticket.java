@@ -1,5 +1,6 @@
 package lesson4.task2;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
@@ -50,7 +51,8 @@ class Ticket {
     }
 
     public String getDate() {
-        return date.toString();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        return formatter.format(date);
     }
 
     @Override
@@ -68,11 +70,11 @@ class Ticket {
     //endregion
     //region Fields
     private static int counter;
-    private int id;
-    private int customerId;
-    private Date date = new Date();
-    private String qrcode;
-    private TicketType ticketType;
+    private final int id;
+    private final int customerId;
+    private final Date date = new Date();
+    private final String qrcode;
+    private final TicketType ticketType;
 
     {
         id = ++counter;

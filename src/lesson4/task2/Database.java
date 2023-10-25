@@ -5,10 +5,10 @@ import java.util.*;
 public class Database {
     // region Fields
     private static int counter;
-    private Collection<Ticket> tickets = new ArrayList<>();
-    private Collection<Customer> customers = new ArrayList<>();
-    private int countCustomers = 10;
-    private int countTickets = 10;
+    private final Collection<Ticket> tickets = new ArrayList<>();
+    private final Collection<Customer> customers = new ArrayList<>();
+    private final int countCustomers = 10;
+    private final int countTickets = 10;
     //endregion
     // region Constructor
     {
@@ -18,13 +18,13 @@ public class Database {
             String surname = String.format("surname %d", i);
             String login = String.format("surname%d", i);
             Customer customer = new Customer(name, surname, login, login);
-            for (int j = 0; j < new Random().nextInt(0, this.countTickets); j++) {
+            for (int j = 0; j < new Random().nextInt(1, this.countTickets); j++) {
                 Random random = new Random();
                 Ticket ticket = new Ticket(i, ticketTypes.get(random.nextInt(ticketTypes.size())));
                 customer.addNewTicket(ticket);
-                this.tickets.add(ticket);
+                addNewTicketToBase(ticket);
             }
-            this.customers.add(customer);
+            addNewCustomerToBase(customer);
         }
     }
 
@@ -37,7 +37,13 @@ public class Database {
     public Collection<Customer> getCustomers() {
         return customers;
     }
+    public void addNewCustomerToBase(Customer customer) {
+        this.customers.add(customer);
+    }
 
+    public void addNewTicketToBase(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
     /**
      * Получить актуальную стоимость билета
      *

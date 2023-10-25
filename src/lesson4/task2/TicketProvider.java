@@ -2,8 +2,6 @@ package lesson4.task2;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
 public class TicketProvider {
     //region Constructor
@@ -18,21 +16,27 @@ public class TicketProvider {
         Collection<Ticket> searchTickets = new ArrayList<>();
         for (Ticket ticket : database.getTickets()) {
             if (ticket.getCustomerId() == clientId && ticket.getDate().equals(date))
-                //System.out.println(ticket.getDate());
                 searchTickets.add(ticket);
         }
         if (searchTickets.isEmpty()) {
             throw new RuntimeException("У пользователя нет билетов на эту дату.");
         }
-        // System.out.println(searchTickets);
         return searchTickets;
     }
 
-    public boolean buyTicket(int clientId, String cardNo) {
+    public Ticket buyTicket(int clientId, String cardNo, TicketType ticketType) {
         int orderId = database.createTicketOrder(clientId);
         double amount = database.getTicketAmount();
-        return paymentProvider.buyTicket(orderId, cardNo, amount);
-
+        Ticket ticket = null;
+        if (paymentProvider.buyTicket(orderId, cardNo, amount)) {
+            ticket = new Ticket(clientId, ticketType);
+            database.addNewTicketToBase(ticket);
+            System.out.println("Покупка билета выполенена успешно.");
+        }
+        if (ticket == null) {
+            System.out.println("Покупка билета не выполенена.");
+        }
+        return ticket;
     }
 
     public boolean checkTicket(String qrcode) {

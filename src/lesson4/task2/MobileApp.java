@@ -1,8 +1,6 @@
 package lesson4.task2;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 public class MobileApp {
     //region Constructor
@@ -13,6 +11,8 @@ public class MobileApp {
 
     //endregion
     //region Properties
+
+
     public void getTickets() throws Exception {
         if (customer == null) {
             throw new RuntimeException("Для просмотра билетов нужна авторизация.");
@@ -32,8 +32,7 @@ public class MobileApp {
         }
         try {
             System.out.println("Ищем билеты...");
-            Collection<Ticket> searchTickets = ticketProvider.searchTicket(customer.getId(), date);
-            System.out.println(customer.searchTickets(ticketProvider.searchTicket(customer.getId(), date)));
+            Collection<Ticket> searchTickets = customer.searchTickets(ticketProvider.searchTicket(customer.getId(), date));
             System.out.println("Найдены билеты:");
             System.out.println(searchTickets);
         } catch (RuntimeException e) {
@@ -66,16 +65,17 @@ public class MobileApp {
         if (customer == null) {
             throw new RuntimeException("Для покупки билета нужна авторизация.");
         }
-        if (ticketProvider.buyTicket(customer.getId(), cardNo)) {
-            Ticket ticket = new Ticket(this.customer.getId(), ticketType);
+        System.out.println("Идет покупка билета...");
+        try {
+            Ticket ticket = ticketProvider.buyTicket(customer.getId(), cardNo, ticketType);
             customer.addNewTicket(ticket);
-            System.out.println("Покупка билета выполенена успешно:");
+            System.out.println("Билет добавлен в ваши билеты:");
             System.out.println(ticket);
-        } else {
-            throw new RuntimeException("Ошибка при покупке билета.");
-        }
+        } catch (RuntimeException e){
+            throw new RuntimeException("Ошибка при покупке билета.", e.fillInStackTrace());
     }
 
+}
 
     //endregion
     //region Fields

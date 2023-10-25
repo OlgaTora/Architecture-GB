@@ -1,6 +1,6 @@
 package lesson3;
 
-public class ServiceStation implements Repairing {
+public class ServiceStation implements Repairing{
 
     @Override
     public void changeOil() {

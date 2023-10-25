@@ -15,7 +15,7 @@ public class Customer {
     //region Properties
     public Collection<Ticket> getTickets() {
         // Постусловие
-        if (tickets == null) {
+        if (tickets.isEmpty()) {
             throw new RuntimeException("У пользователя нет билетов.");
         }
         return tickets;
@@ -23,7 +23,6 @@ public class Customer {
 
     public Collection<Ticket> searchTickets(Collection<Ticket> tickets)
     {
-        System.out.println("Печать из кастомер");
         return tickets;
     }
 
@@ -66,11 +65,11 @@ public class Customer {
     //region Fields
     private static int counter;
     private final int id;
-    private String name;
-    private String surname;
-    private String password;
-    private String login;
-    private Collection<Ticket> tickets = new ArrayList<>();
+    private final String name;
+    private final String surname;
+    private final String password;
+    private final String login;
+    private final Collection<Ticket> tickets = new ArrayList<>();
 
     {
         id = ++counter;
