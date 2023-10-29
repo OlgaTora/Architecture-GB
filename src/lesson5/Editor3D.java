@@ -2,7 +2,7 @@ package lesson5;
 
 import java.util.ArrayList;
 
-public class Editor3D implements UILayer{
+public class Editor3D implements UILayer {
 
 
     private ProjectFile projectFile;
@@ -13,7 +13,7 @@ public class Editor3D implements UILayer{
     /**
      * Полностью пересобираем внутренние компоненты системы (новый проект)
      */
-    private void initialize(){
+    private void initialize() {
         database = new EditorDatabase(projectFile);
         databaseAccess = new EditorDatabaseAccess(database);
         businessLogicalLayer = new EditorBusinessLogicalLayer(databaseAccess);
@@ -25,6 +25,7 @@ public class Editor3D implements UILayer{
         projectFile = new ProjectFile(fileName);
         initialize();
     }
+
     @Override
     public void saveProject() {
         System.out.println("Изменения успешно сохранены.");
@@ -50,11 +51,11 @@ public class Editor3D implements UILayer{
         // Предусловие
         checkProjectFile();
 
-        ArrayList<Model3D> models = (ArrayList<Model3D>)businessLogicalLayer.getAllModels();
-        for (int i = 0; i < models.size(); i++){
+        ArrayList<Model3D> models = (ArrayList<Model3D>) businessLogicalLayer.getAllModels();
+        for (int i = 0; i < models.size(); i++) {
             System.out.printf("===%d===\n", i);
             System.out.println(models.get(i));
-            for (Texture texture: models.get(i).getTextures()) {
+            for (Texture texture : models.get(i).getTextures()) {
                 System.out.printf("\t%s\n", texture);
             }
         }
@@ -65,8 +66,8 @@ public class Editor3D implements UILayer{
         // Предусловие
         checkProjectFile();
 
-        ArrayList<Texture> textures = (ArrayList<Texture>)businessLogicalLayer.getAllTextures();
-        for (int i = 0; i < textures.size(); i++){
+        ArrayList<Texture> textures = (ArrayList<Texture>) businessLogicalLayer.getAllTextures();
+        for (int i = 0; i < textures.size(); i++) {
             System.out.printf("===%d===\n", i);
             System.out.println(textures.get(i));
         }
@@ -90,7 +91,7 @@ public class Editor3D implements UILayer{
         // Предусловие
         checkProjectFile();
 
-        ArrayList<Model3D> models = (ArrayList<Model3D>)businessLogicalLayer.getAllModels();
+        ArrayList<Model3D> models = (ArrayList<Model3D>) businessLogicalLayer.getAllModels();
         if (i < 0 || i > models.size() - 1)
             throw new RuntimeException("Номер модели указан некорректною.");
         System.out.println("Подождите ...");
@@ -101,7 +102,40 @@ public class Editor3D implements UILayer{
 
     }
 
-    private void checkProjectFile(){
+    @Override
+    public void addNewModel(Model3D model) {
+        // Предусловие
+        checkProjectFile();
+    }
+
+    @Override
+    public void addNewTexture(Texture texture) {
+        // Предусловие
+        checkProjectFile();
+    }
+
+    @Override
+    public void removeModel(int i) {
+        // Предусловие
+        checkProjectFile();
+
+        ArrayList<Model3D> models = (ArrayList<Model3D>) businessLogicalLayer.getAllModels();
+        if (i < 0 || i > models.size() - 1)
+            throw new RuntimeException("Номер модели указан некорректно.");
+
+    }
+
+    @Override
+    public void removeTexture(int i) {
+        // Предусловие
+        checkProjectFile();
+
+        ArrayList<Texture> textures = (ArrayList<Texture>) businessLogicalLayer.getAllTextures();
+        if (i < 0 || i > textures.size() - 1)
+            throw new RuntimeException("Номер текстуры указан некорректно.");
+    }
+
+    private void checkProjectFile() {
         if (projectFile == null)
             throw new RuntimeException("Файл проекта не определен.");
     }
