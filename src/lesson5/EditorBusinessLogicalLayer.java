@@ -35,6 +35,26 @@ public class EditorBusinessLogicalLayer implements BusinessLogicalLayer {
         }
     }
 
+    @Override
+    public void addModel(Model3D model) {
+
+    }
+
+    @Override
+    public void removeModel(Model3D model) {
+
+    }
+
+    @Override
+    public void addTexture(Texture texture) {
+
+    }
+
+    @Override
+    public void removeTexture(Texture texture) {
+
+    }
+
     private Random random = new Random();
 
     private void processRender(Model3D model){
