@@ -120,9 +120,12 @@ public class Editor3D implements UILayer {
         checkProjectFile();
 
         ArrayList<Model3D> models = (ArrayList<Model3D>) businessLogicalLayer.getAllModels();
-        if (i < 0 || i > models.size() - 1)
-            throw new RuntimeException("Номер модели указан некорректно.");
-
+        Model3D model = businessLogicalLayer.getModel(i);
+        if (model == null) {
+            throw new RuntimeException("Такой модели не существует.");
+        }
+        businessLogicalLayer.removeModel(model);
+        System.out.printf("Модель %s удалена", model);
     }
 
     @Override
@@ -131,8 +134,12 @@ public class Editor3D implements UILayer {
         checkProjectFile();
 
         ArrayList<Texture> textures = (ArrayList<Texture>) businessLogicalLayer.getAllTextures();
-        if (i < 0 || i > textures.size() - 1)
-            throw new RuntimeException("Номер текстуры указан некорректно.");
+        Texture texture = businessLogicalLayer.getTexture(i);
+        if (texture == null) {
+            throw new RuntimeException("Такой текстуры не существует.");
+        }
+        businessLogicalLayer.removeTexture(texture);
+        System.out.printf("Текстура %s удалена", texture);
     }
 
     private void checkProjectFile() {

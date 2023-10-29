@@ -19,5 +19,7 @@ public interface BusinessLogicalLayer {
     void addTexture(Texture texture);
 
     void removeTexture(Texture texture);
+    Model3D getModel(int i);
+    Texture getTexture(int i);
 
 }

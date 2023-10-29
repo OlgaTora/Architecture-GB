@@ -84,6 +84,7 @@ public class EditorDatabaseAccess implements DatabaseAccess {
         Model3D resModel = null;
         for (Model3D model : models) {
             if (i == model.getId()) {
+                System.out.println(model.getId());
                 resModel = model;
             }
         }return resModel;
