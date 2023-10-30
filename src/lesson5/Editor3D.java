@@ -1,6 +1,7 @@
 package lesson5;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Editor3D implements UILayer {
 
@@ -93,7 +94,7 @@ public class Editor3D implements UILayer {
 
         ArrayList<Model3D> models = (ArrayList<Model3D>) businessLogicalLayer.getAllModels();
         if (i < 0 || i > models.size() - 1)
-            throw new RuntimeException("Номер модели указан некорректною.");
+            throw new RuntimeException("Номер модели указан некорректно.");
         System.out.println("Подождите ...");
         long startTime = System.currentTimeMillis();
         businessLogicalLayer.renderModel(models.get(i));
@@ -103,16 +104,29 @@ public class Editor3D implements UILayer {
     }
 
     @Override
-    public void addNewModel(Model3D model) {
+    public void addNewModel(String modelName, int i) {
         // Предусловие
         checkProjectFile();
+
+        Collection<Texture>textures = new ArrayList<>();
+        Texture texture = businessLogicalLayer.getTexture(i);
+        if (texture == null) {
+            throw new RuntimeException("Такой текстуры не существует. Выберите другую");
+        }
+        textures.add(texture);
+        businessLogicalLayer.addModel(modelName, textures);
+        System.out.printf("Модель %s создана", modelName);
     }
 
     @Override
-    public void addNewTexture(Texture texture) {
+    public void addNewTexture(String textureName) {
         // Предусловие
         checkProjectFile();
+        businessLogicalLayer.addTexture(textureName);
+        System.out.printf("Текстура %s создана", textureName);
+
     }
+
 
     @Override
     public void removeModel(int i) {

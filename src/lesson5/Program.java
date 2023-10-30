@@ -30,6 +30,9 @@ public class Program {
             System.out.println("6. Выполнить рендер всех моделей");
             System.out.println("7. Выполнить рендер модели");
             System.out.println("8. Удалить модель");
+            System.out.println("9. Добавить модель");
+            System.out.println("10. Удалить текстуру");
+            System.out.println("11. Добавить текстуру");
             System.out.println("0. ЗАВЕРШЕНИЕ РАБОТЫ ПРИЛОЖЕНИЯ");
             System.out.print("Пожалуйста, выберите пункт меню: ");
             if (scanner.hasNextInt()){
@@ -79,6 +82,34 @@ public class Program {
                             }
                             else {
                                 System.out.println("Номер модели указан некорректно.");
+                            }
+                            break;
+                        case 9:
+                            System.out.print("Впишите название модели: ");
+                            if (scanner.hasNextLine()) {
+                                String modelName = scanner.nextLine();
+                                System.out.print("Выберите номер текстуры: ");
+                                int index = scanner.nextInt();
+                                scanner.nextLine();
+                                editor3D.addNewModel(modelName, index);
+                            }
+                            break;
+                        case 10:
+                            System.out.print("Укажите номер текстуры: ");
+                            if (scanner.hasNextInt()){
+                                int textureNo = scanner.nextInt();
+                                scanner.nextLine();
+                                editor3D.removeTexture(textureNo);
+                            }
+                            else {
+                                System.out.println("Номер текстуры указан некорректно.");
+                            }
+                            break;
+                        case 11:
+                            System.out.print("Впишите название текстуры: ");
+                            if (scanner.hasNextLine()) {
+                                String textureName = scanner.nextLine();
+                                editor3D.addNewTexture(textureName);
                             }
                             break;
                         default:

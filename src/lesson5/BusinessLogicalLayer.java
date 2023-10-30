@@ -12,14 +12,16 @@ public interface BusinessLogicalLayer {
 
     void renderAllModels();
 
-    void addModel(Model3D model);
+    void addModel(String model, Collection<Texture> texture);
 
     void removeModel(Model3D model);
 
-    void addTexture(Texture texture);
+    void addTexture(String textureName);
 
     void removeTexture(Texture texture);
+
     Model3D getModel(int i);
+
     Texture getTexture(int i);
 
 }

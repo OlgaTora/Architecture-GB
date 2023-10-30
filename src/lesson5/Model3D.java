@@ -3,23 +3,28 @@ package lesson5;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Model3D implements Entity{
+public class Model3D implements Entity {
+    {
+        id = ++counter;
+    }
+    //region Constructor
 
-    private static int counter = 10000;
-    private int id;
-    private Collection<Texture> textures;
+    public Model3D(String modelName, Collection<Texture> textures) {
+        this.modelName = modelName;
+        this.textures = textures;
+    }
+
+    public Model3D() {
+    }
+    //endregion
+    //region Properties
 
     public Collection<Texture> getTextures() {
-        if (textures == null){
+        if (textures == null) {
             textures = new ArrayList<>();
         }
         return textures;
     }
-
-    {
-        id = ++counter;
-    }
-
 
     @Override
     public int getId() {
@@ -28,6 +33,14 @@ public class Model3D implements Entity{
 
     @Override
     public String toString() {
-        return String.format("3DModel #%s", id);
+        return String.format("3DModel %s, #%s", modelName, id);
     }
+
+    //endregion
+    //region Fields
+    private static int counter = 10000;
+    private int id;
+    String modelName;
+    private Collection<Texture> textures;
+    //endregion
 }

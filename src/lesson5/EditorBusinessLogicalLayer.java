@@ -36,8 +36,9 @@ public class EditorBusinessLogicalLayer implements BusinessLogicalLayer {
     }
 
     @Override
-    public void addModel(Model3D model) {
-        databaseAccess.addEntity(model);
+    public void addModel(String modelName, Collection<Texture> texture) {
+        Model3D newModel = new Model3D(modelName, texture);
+        databaseAccess.addEntity(newModel);
     }
 
     @Override
@@ -46,8 +47,9 @@ public class EditorBusinessLogicalLayer implements BusinessLogicalLayer {
     }
 
     @Override
-    public void addTexture(Texture texture) {
-        databaseAccess.addEntity(texture);
+    public void addTexture(String textureName) {
+        Texture newTexture = new Texture(textureName);
+        databaseAccess.addEntity(newTexture);
     }
 
     @Override
