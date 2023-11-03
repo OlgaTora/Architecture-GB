@@ -10,6 +10,10 @@ public class Note {
         this.title = title;
         this.details = details;
     }
+    public Note(String title, String details) {
+        this.title = title;
+        this.details = details;
+    }
 
     //endregion
 
@@ -46,7 +50,7 @@ public class Note {
 
     @Override
     public String toString() {
-        return String.format("%s %s", title, details);
+        return String.format("id %d %s %s", id, title, details);
     }
 
 }

@@ -33,5 +33,12 @@ public class NotesRecord {
         id = ++counter;
     }
 
-
+    @Override
+    public String toString() {
+        return "NotesRecord{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", details='" + details + '\'' +
+                '}';
+    }
 }

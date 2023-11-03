@@ -1,7 +1,7 @@
 package lesson6.presentation.queries.views;
 
-import ru.geekbrains.lesson6.application.interfaces.NotesPresenter;
-import ru.geekbrains.lesson6.domain.Note;
+import lesson6.application.interfaces.NotesPresenter;
+import lesson6.domain.Note;
 
 import java.util.Collection;
 

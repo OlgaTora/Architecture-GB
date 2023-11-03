@@ -1,6 +1,6 @@
 package lesson6.database;
 
-import ru.geekbrains.lesson6.infrastructure.persistance.Database;
+import lesson6.infrastructure.persistance.Database;
 
 public class NotesDatabase implements Database {
 

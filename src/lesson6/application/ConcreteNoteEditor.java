@@ -1,9 +1,9 @@
 package lesson6.application;
 
-import ru.geekbrains.lesson6.application.interfaces.NoteEditor;
-import ru.geekbrains.lesson6.application.interfaces.NotesDatabaseContext;
-import ru.geekbrains.lesson6.application.interfaces.NotesPresenter;
-import ru.geekbrains.lesson6.domain.Note;
+import lesson6.application.interfaces.NoteEditor;
+import lesson6.application.interfaces.NotesDatabaseContext;
+import lesson6.application.interfaces.NotesPresenter;
+import lesson6.domain.Note;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -22,24 +22,26 @@ public class ConcreteNoteEditor implements NoteEditor {
 
     @Override
     public boolean add(Note item) {
-        dbContext.getAll().add(item);
-        return dbContext.saveChanges();
+        return dbContext.addNote(item);
     }
 
     @Override
     public boolean edit(Note item) {
-        return false;
+        return dbContext.editNote(item);
     }
 
     @Override
     public boolean remove(Note item) {
-        dbContext.getAll().remove(item);
-        return dbContext.saveChanges();
+        return dbContext.removeNote(item);
     }
 
     @Override
-    public Optional<Note> getById(Integer integer) {
-        return Optional.empty();
+    public Optional<Note> getById(Integer idNote) {
+        for (Note note : dbContext.getAll()) {
+            if (idNote == note.getId()) {
+                return Optional.of(note);
+            }
+        }return Optional.empty();
     }
 
     @Override
@@ -51,4 +53,5 @@ public class ConcreteNoteEditor implements NoteEditor {
     public void printAll() {
         presenter.printAll(getAll());
     }
+
 }
